@@ -17,6 +17,7 @@ export default function NavLink({ children, href, ...rest }: NavLinkProps) {
         display="flex"
         align="center"
         {...rest}
+        textTransform="uppercase"
         _focus={{ outline: "none" }}
         _hover={{ textDecor: "none" }}
       >
