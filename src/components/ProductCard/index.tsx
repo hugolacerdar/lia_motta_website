@@ -46,9 +46,12 @@ export default function ProductCard({
         borderRadius="0 0 3px 3px"
       >
         <Flex direction="column" w="100%">
-          <Heading fontSize="xl" fontWeight="500">
-            {title} - {price}
-          </Heading>
+          <Flex w="100%" justifyContent="space-between">
+            <Heading fontSize="xl" fontWeight="400">
+              {title}
+            </Heading>
+            <Text fontFamily={`'Fraunces', serif;`}>{price}</Text>
+          </Flex>
           <Link href={`/produtos/${slug}`} passHref>
             <Button
               mt="10px"
