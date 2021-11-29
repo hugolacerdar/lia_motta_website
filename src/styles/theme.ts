@@ -14,4 +14,8 @@ export const theme = extendTheme({
       },
     },
   },
+  fonts: {
+    heading: "MiedingerBook",
+    body: "Necto Mono",
+  },
 });
