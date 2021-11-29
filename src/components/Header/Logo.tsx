@@ -1,9 +1,9 @@
-import { Text } from "@chakra-ui/layout";
+import { Heading, Text } from "@chakra-ui/layout";
 
 interface LogoProps {
   color: string;
 }
 
 export default function Logo({ color }: LogoProps) {
-  return <Text color={color}>Lia Motta</Text>;
+  return <Heading color={color}>lia motta</Heading>;
 }
