@@ -4,12 +4,14 @@ import { cloneElement, ReactElement } from "react";
 
 interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
+  borderColor: string;
   shouldMatchExactHref?: boolean;
 }
 
 export function ActiveLink({
   children,
   shouldMatchExactHref = false,
+  borderColor,
   ...rest
 }: ActiveLinkProps) {
   const { asPath } = useRouter();
@@ -31,9 +33,7 @@ export function ActiveLink({
   return (
     <Link {...rest}>
       {cloneElement(children, {
-        borderBottom: isActive
-          ? `1px solid ${isHome ? "white" : "black"}`
-          : "none",
+        borderBottom: isActive ? `1px solid ${borderColor}` : "none",
       })}
     </Link>
   );

@@ -33,7 +33,9 @@ export default function Header() {
         display={["none", "none", "block", "block"]}
       >
         <HStack spacing="9" color={isHome ? "white" : "gray.900"}>
-          <NavLink href="/">Início</NavLink>
+          <NavLink href="/" borderColor="white">
+            Início
+          </NavLink>
           <NavLink href="/produtos">Produtos</NavLink>
           <NavLink href="/sobre">Sobre</NavLink>
           <NavLink href="/contato">Contato</NavLink>
