@@ -1,5 +1,13 @@
 import { Image } from "@chakra-ui/image";
-import { Container, Flex, Icon } from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Icon,
+  Grid,
+  Box,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { RichText } from "prismic-dom";
 import {
@@ -9,6 +17,8 @@ import {
   ButtonBack,
   ButtonNext,
 } from "pure-react-carousel";
+import Link from "next/link";
+import Head from "next/head";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
 import "pure-react-carousel/dist/react-carousel.es.css";
@@ -40,34 +50,91 @@ interface SingleProductPageProps {
 
 export default function SingleProductPage({ product }: SingleProductPageProps) {
   return (
-    <Container>
-      <CarouselProvider
-        naturalSlideWidth={320}
-        naturalSlideHeight={400}
-        totalSlides={3}
+    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto">
+      <Head>
+        <title>{product.title} | Lia Motta</title>
+      </Head>
+      <Flex
+        alignItems="center"
+        color="gray.500"
+        marginBottom="30px"
+        ml={["10px", "10px", "10px", "0"]}
       >
-        <Slider style={{ "max-height": "420px" }}>
-          <Slide index={0}>
-            <Image src={product.images[0].url} alt={product.slug} h={400} />
-          </Slide>
-          <Slide index={1}>
-            <Image src={product.images[1].url} alt={product.slug} h={400} />
-          </Slide>
-          <Slide index={2}>
-            <Image src={product.images[2].url} alt={product.slug} h={400} />
-          </Slide>
-        </Slider>
-        <Flex justifyContent="center" width="320px">
-          <ButtonBack>
-            <Icon as={RiArrowLeftSLine} w={8} h={8} mr={10} />
-          </ButtonBack>
+        <Link href="/">Home</Link> <Icon as={RiArrowRightSLine} />{" "}
+        <Link href="/produtos">Produtos</Link> <Icon as={RiArrowRightSLine} />{" "}
+        {product.title}{" "}
+      </Flex>
+      <Grid gridTemplateColumns={["1fr", "1fr", "1fr", "1fr 2fr"]} gap="30px">
+        <Container>
+          <CarouselProvider
+            naturalSlideWidth={1080}
+            naturalSlideHeight={1350}
+            totalSlides={3}
+          >
+            <Slider style={{ "max-height": "420px" }}>
+              <Slide index={0}>
+                <Image
+                  src={product.images[0].url}
+                  alt={product.images[0].alt}
+                  h={400}
+                />
+              </Slide>
+              <Slide index={1}>
+                <Image
+                  src={product.images[1].url}
+                  alt={product.images[0].alt}
+                  h={400}
+                />
+              </Slide>
+              <Slide index={2}>
+                <Image
+                  src={product.images[2].url}
+                  alt={product.images[0].alt}
+                  h={400}
+                />
+              </Slide>
+            </Slider>
+            <Flex justifyContent="center" width="320px">
+              <ButtonBack>
+                <Icon as={RiArrowLeftSLine} w={8} h={8} mr={10} />
+              </ButtonBack>
+              <ButtonNext>
+                <Icon as={RiArrowRightSLine} w={8} h={8} ml={10} />
+              </ButtonNext>
+            </Flex>
+          </CarouselProvider>
+        </Container>
+        <Box mx={["10px", "10px", "10px", "0"]}>
+          <Heading size="lg" mb="20px">
+            {product.title}
+          </Heading>
+          <Box
+            as="div"
+            ml={["10px", "10px", "10px", "0"]}
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
 
-          <ButtonNext>
-            <Icon as={RiArrowRightSLine} w={8} h={8} ml={10} />
-          </ButtonNext>
-        </Flex>
-      </CarouselProvider>
-    </Container>
+          <Link href={product.stripeUrl} passHref>
+            <Button
+              mt="30px"
+              color="white"
+              bgColor="gray.900"
+              _hover={{
+                bgColor: "white",
+                color: "gray.900",
+                borderColor: "gray.900",
+                border: "1px",
+              }}
+              _focus={{ outline: "none" }}
+              padding="35px"
+              w="100%"
+            >
+              COMPRAR AGORA
+            </Button>
+          </Link>
+        </Box>
+      </Grid>
+    </Box>
   );
 }
 
@@ -81,13 +148,12 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const response = await prismic.getByUID("produto", String(slug), {});
 
-  console.log(response.data);
   const product = {
     slug,
     title: response.data.titulo[0].text,
     description: RichText.asHtml(response.data.descricao),
     price: response.data.preco,
-    stringUrl: response.data.pagamento.url,
+    stripeUrl: response.data.pagamento.url,
     updatedAt: new Date(
       response.last_publication_date as string
     ).toLocaleDateString("pt-BR", {
@@ -98,7 +164,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     images: Object.values(response.data.imagens[0]),
   };
 
-  console.log(product);
   return {
     props: {
       product,
