@@ -25,7 +25,7 @@ export default function Header() {
       px="6"
       align="center"
     >
-      <Logo color={isHome ? "white" : "black"} />
+      <Logo color={isHome ? "white" : "gray.900"} />
 
       <Flex
         align="center"
@@ -46,6 +46,7 @@ export default function Header() {
         _focus={{ outline: "none" }}
       >
         <IconButton
+          color={isHome ? "white" : "gray.900"}
           display={["block", "block", "none", "none"]}
           aria-label="Open navigation"
           icon={<Icon as={RiMenuLine} />}
