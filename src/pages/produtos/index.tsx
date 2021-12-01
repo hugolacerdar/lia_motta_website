@@ -6,6 +6,7 @@ import { Grid, SimpleGrid } from "@chakra-ui/layout";
 import ProductCard from "../../components/ProductCard";
 import formatMoney from "../../utils/formatMoney";
 import { Box } from "@chakra-ui/react";
+import Head from "next/head";
 
 interface Image {
   dimensions: { width: number; height: number };
@@ -26,6 +27,9 @@ interface ProductsPageProps {
 export default function ProductsPage({ products }: ProductsPageProps) {
   return (
     <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto">
+      <Head>
+        <title>Shop | Lia Motta</title>
+      </Head>
       <Grid
         templateColumns={["1fr", "1fr 1fr", "repeat(3, 1fr)"]}
         gap={["20px", "30px", "100px"]}
