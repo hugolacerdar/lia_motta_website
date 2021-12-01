@@ -50,7 +50,7 @@ export default function ProductCard({
             <Heading fontSize="xl" fontWeight="400">
               {title}
             </Heading>
-            <Text fontFamily={`'Fraunces', serif;`}>{price}</Text>
+            <Text>{price}</Text>
           </Flex>
           <Link href={`/produtos/${slug}`} passHref>
             <Button
