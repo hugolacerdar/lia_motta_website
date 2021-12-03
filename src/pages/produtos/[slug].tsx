@@ -101,7 +101,11 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
                 />
               </Slide>
             </Slider>
-            <Flex justifyContent="center" width="300px" mt="10px">
+            <Flex
+              justifyContent="center"
+              maxW={["320px", "350px", "400px", "400px"]}
+              mt="10px"
+            >
               <ButtonBack>
                 <Icon as={RiArrowLeftSLine} w={8} h={8} mr={10} />
               </ButtonBack>
