@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { Box, Grid, Image, Text, Stack } from "@chakra-ui/react";
+import { Box, Grid, Image, Text, Stack, Flex, Icon } from "@chakra-ui/react";
+import { RiArrowRightSLine } from "react-icons/ri";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -7,48 +9,59 @@ export default function AboutPage() {
       <Head>
         <title>Sobre | Lia Motta</title>
       </Head>
+      <Flex
+        alignItems="center"
+        color="gray.500"
+        marginBottom="30px"
+        ml={["10px", "10px", "10px", "0"]}
+      >
+        <Link href="/">Início</Link> <Icon as={RiArrowRightSLine} />{" "}
+        <Link href="/produtos">Sobre</Link>
+      </Flex>
+
       <Grid gridTemplateColumns={["1fr", "1fr", "1fr", "1.5fr 2fr"]} gap="30px">
         <Image src="./bio.JPG" alt=""></Image>
         <Stack spacing="20px" mx={["20px", "0", "0", "0"]} textAlign="justify">
           <Text>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti
-            quam sequi vitae totam enim quidem voluptas ducimus voluptatem
-            magnam harum, earum voluptate minima possimus magni id iure ipsa nam
-            doloribus nihil consectetur ab maiores natus quisquam? Id, nihil
-            suscipit illum eaque nisi blanditiis quae sequi, vero odio aut sint
-            iure rem officia? Pariatur quaerat perspiciatis accusantium possimus
-            laborum, fuga exercitationem! Odit fugit ad, quas et non voluptate
-            qui, excepturi culpa maiores harum, tempora unde! Voluptatem placeat
-            enim eius at odit cumque voluptatum neque nobis deserunt, dolorem
-            nostrum officiis natus veniam ducimus praesentium sit repudiandae
-            tempore dicta, error unde explicabo nemo rem! Saepe magni velit
-            commodi voluptates veniam sed autem possimus modi dolores deserunt
-            dolorum, recusandae iusto repellat blanditiis! Quibusdam accusantium
-            ipsum suscipit vero! Distinctio eius deleniti a officia praesentium,
-            aperiam minima libero?
+            Olá! Eu me chamo Lia Motta. Sou criadora de conteúdo, vegana há mais
+            de cinco anos, escritora assídua de diário, amante de doramas e
+            k-pop, e cultivo um grande interesse sobre a criação de hábitos que
+            alimento por meio de minhas leituras.
           </Text>
+
           <Text>
-            Animi, rem architecto earum eum possimus nihil quidem quam commodi.
-            Voluptatum, dolorum. A neque ullam voluptates enim dolor vel? Id,
-            saepe enim. Repellat, laborum. Neque facilis error recusandae a esse
-            perspiciatis, quaerat aperiam rem ullam quas nam architecto quod
-            quasi odio fugiat illum sed numquam nihil, nisi distinctio,
-            consectetur pariatur sit magnam enim! Iste aspernatur consequuntur
-            vel possimus eveniet, laborum molestias aut nam vero laudantium
-            dicta fugit necessitatibus aliquam perferendis optio voluptatum,
-            voluptatibus eaque velit illum repudiandae qui esse fuga rem eos?
-            Quia veritatis ipsa quos odit minus! Voluptates laudantium
-            distinctio quasi magni architecto praesentium, totam ducimus
-            similique, optio ratione accusantium blanditiis maiores repellat
-            delectus, quis officiis fuga ullam. Quod eaque dolor atque quam,
-            perspiciatis necessitatibus soluta doloremque ipsa nesciunt
-            praesentium aperiam assumenda quasi esse quo voluptate
-            exercitationem, consequatur, corrupti iste. Fugit tenetur
-            voluptatibus officia. Incidunt necessitatibus numquam voluptatibus
-            natus nostrum alias totam, earum aperiam nobis, saepe eos animi,
-            odio enim. Perferendis accusantium nobis aspernatur minima ipsum
-            aperiam qui aliquid animi impedit ut, dolorem aliquam error saepe
-            quas.
+            Nasci em julho de 1999 e, desde muito cedo, já gostava de criar
+            comunidades (os vários clubinhos quando criança) e de compartilhar
+            minhas ideias e conhecimentos (alô bloguinhos que tive na
+            adolescência).
+          </Text>
+
+          <Text>
+            Durante minha vida, passei por muitas coisas complicadas como
+            bullying, tricotilomania, depressão, compulsão alimentar e
+            ortorexia. E, até meados de 2020, eu não conseguia enxergar muito
+            futuro para mim. Costumava ser muito sedentária, extremamente
+            ansiosa e procrastinadora, passando grande parte do meu tempo vendo
+            vidas alheias na internet ao invés de focar em mim. Além disso,
+            minha autoconfiança era ruim demais, pois acreditava que eu não era
+            capaz de conquistar nada na minha vida.
+          </Text>
+
+          <Text>
+            Porém, tudo isso começou a mudar em novembro de 2020, quando
+            compreendi que precisava começar a me priorizar, me cuidar, e
+            investir minha energia e tempo em mim. A partir de então, comecei a
+            mudar, sair da minha zona de conforto, e entrei na jornada mais
+            linda e estranha de toda minha vida. Esta jornada envolvia uma
+            mudança radical em meus hábitos, escolhas, comportamentos, e
+            pensamentos. Hoje, sinto do fundo do meu coração que estou cada dia
+            mais conectada com minha autêntica versão e construindo a vida dos
+            meus sonhos, pois, com o tempo, fui compreendendo que meu propósito
+            aqui na Terra é ajudar os outros a também vivenciarem essa
+            transformação. Por isso, resolvi começar a partilhar minha sincera
+            evolução pessoal, minha jornada de autoconhecimento e bem-estar a
+            fim de poder, de algum modo, motivar e incentivar outras pessoas em
+            suas jornadas de crescimento, conhecimento e cuidado.
           </Text>
         </Stack>
       </Grid>
