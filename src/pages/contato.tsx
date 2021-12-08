@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Box, Grid, Image, Text, Stack, Flex, Icon } from "@chakra-ui/react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import Link from "next/link";
+import ContactForm from "../components/ContactForm";
 
 export default function ContactPage() {
   return (
@@ -21,6 +22,7 @@ export default function ContactPage() {
         <Link href="/">Início</Link> <Icon as={RiArrowRightSLine} />{" "}
         <Link href="/produtos">Contato</Link>
       </Flex>
+      <ContactForm />
     </Box>
   );
 }
