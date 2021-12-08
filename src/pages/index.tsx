@@ -5,8 +5,9 @@ import Head from "next/head";
 const Home: NextPage = () => {
   return (
     <Box
-      bgImg="url('/bg_test.JPG')"
-      bgSize="100%"
+      bgImg="url('/capa1.jpeg')"
+      bgSize="cover"
+      bgPos="center"
       bgRepeat="no-repeat"
       w="100vw"
       h="100vh"
@@ -19,8 +20,6 @@ const Home: NextPage = () => {
         <title>Início | Lia Motta</title>
         <meta name="description" content="Site de Lia Motta." />
       </Head>
-
-      <h1>Home</h1>
     </Box>
   );
 };
