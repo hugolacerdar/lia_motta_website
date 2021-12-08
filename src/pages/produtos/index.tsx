@@ -2,11 +2,13 @@ import { getPrismicClient } from "../../services/prismic";
 import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import { RichText } from "prismic-dom";
-import { Grid, SimpleGrid } from "@chakra-ui/layout";
+import { Grid, Flex, Icon } from "@chakra-ui/react";
 import ProductCard from "../../components/ProductCard";
 import formatMoney from "../../utils/formatMoney";
 import { Box } from "@chakra-ui/react";
 import Head from "next/head";
+import Link from "next/link";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 interface Image {
   dimensions: { width: number; height: number };
@@ -26,10 +28,20 @@ interface ProductsPageProps {
 
 export default function ProductsPage({ products }: ProductsPageProps) {
   return (
-    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto">
+    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
       <Head>
         <title>Shop | Lia Motta</title>
       </Head>
+      <Flex
+        alignItems="center"
+        color="gray.500"
+        marginBottom="30px"
+        ml={["10px", "10px", "10px", "0"]}
+      >
+        <Link href="/">Início</Link> <Icon as={RiArrowRightSLine} />{" "}
+        <Link href="/produtos">Produtos</Link>
+      </Flex>
+
       <Grid
         templateColumns={["1fr", "1fr 1fr", "repeat(3, 1fr)"]}
         gap={["20px", "30px", "100px"]}
