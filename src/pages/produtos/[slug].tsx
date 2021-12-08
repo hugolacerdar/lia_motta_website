@@ -19,6 +19,7 @@ import {
   FormControl,
   FormLabel,
   Switch,
+  Link as ChakraLink,
   useClipboard,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
@@ -37,7 +38,7 @@ import {
   RiArrowRightSLine,
   RiCheckLine,
   RiFileCopyLine,
-  RiMailSendLine,
+  RiExternalLinkFill,
   RiQrCodeFill,
 } from "react-icons/ri";
 
@@ -61,9 +62,10 @@ interface Product {
   description: string;
   price: number;
   stripeUrl: string;
-  qrCode: { imageUrl: string; code: string };
+  qrCode?: { imageUrl?: string; code?: string };
+  productLink?: string;
   slug: string;
-  updatedAt: Date;
+  updatedAt: string;
   images: Image[];
 }
 
@@ -77,7 +79,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
   const { hasCopied, onCopy } = useClipboard(product.qrCode?.code);
 
   return (
-    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto">
+    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
       <Head>
         <title>{product.title} | Lia Motta</title>
       </Head>
@@ -87,7 +89,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
         marginBottom="30px"
         ml={["10px", "10px", "10px", "0"]}
       >
-        <Link href="/">Home</Link> <Icon as={RiArrowRightSLine} />{" "}
+        <Link href="/">Início</Link> <Icon as={RiArrowRightSLine} />{" "}
         <Link href="/produtos">Produtos</Link> <Icon as={RiArrowRightSLine} />{" "}
         {product.title}{" "}
       </Flex>
@@ -231,7 +233,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
-              {showQRCode ? (
+              {showQRCode && product.qrCode ? (
                 <Box>
                   <Image
                     src={product.qrCode.imageUrl}
@@ -280,72 +282,50 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
               )}
             </>
           ) : (
-            <Grid
-              gridTemplateColumns={["1fr", "1fr", "1fr", "1fr", "1.5fr 1fr"]}
-              mt="30px"
-            >
-              <InputGroup>
-                <InputLeftElement pointerEvents="none">
-                  <Icon as={RiMailSendLine} color="gray.900" />
-                </InputLeftElement>
-                <Input
-                  borderColor="gray.900"
-                  borderTopRightRadius={[
-                    "var(--chakra-radii-md)",
-                    "var(--chakra-radii-md)",
-                    "var(--chakra-radii-md)",
-                    "var(--chakra-radii-md)",
-                    "0",
-                  ]}
-                  borderBottomRightRadius="0"
-                  borderBottomLeftRadius={[
-                    "0",
-                    "0",
-                    "0",
-                    "0",
-                    "var(--chakra-radii-md)",
-                  ]}
-                  borderRight={[
-                    "solid 1px gray.900",
-                    "solid 1px gray.900",
-                    "solid 1px gray.900",
-                    "solid 1px gray.900",
-                    "none",
-                  ]}
-                  _focus={{ outline: "none", backgroundColor: "gray.100" }}
-                  _hover={{ backgroundColor: "gray.100" }}
-                />
-              </InputGroup>
-              <Button
-                borderBottomLeftRadius={[
-                  "var(--chakra-radii-md)",
-                  "var(--chakra-radii-md)",
-                  "var(--chakra-radii-md)",
-                  "var(--chakra-radii-md)",
-                  "0",
-                ]}
-                borderTopLeftRadius="0"
-                borderTopRightRadius={[
-                  "0",
-                  "0",
-                  "0",
-                  "0",
-                  "var(--chakra-radii-md)",
-                ]}
-                color="white"
-                bgColor="gray.900"
-                _hover={{
-                  bgColor: "white",
-                  color: "gray.900",
-                  borderColor: "gray.900",
-                  border: "1px",
-                }}
-                _focus={{ outline: "none" }}
-                w="100%"
-              >
-                RECEBER WORKBOOK
-              </Button>
-            </Grid>
+            <Accordion allowMultiple>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton
+                    borderRadius="var(--chakra-radii-md)"
+                    mt="20px"
+                    color="white"
+                    bgColor="gray.900"
+                    _hover={{
+                      bgColor: "white",
+                      color: "gray.900",
+                      borderColor: "gray.900",
+                      border: "1px",
+                    }}
+                    _focus={{ outline: "none" }}
+                    padding="25px"
+                    w="100%"
+                  >
+                    <Box
+                      flex="1"
+                      textAlign="center"
+                      fontWeight="bold"
+                      textTransform="uppercase"
+                    >
+                      QUERO BAIXAR GRATUITAMENTE
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Text mt="30px">
+                    Clique no nome dos arquivos que deseja acessar:
+                  </Text>
+                  <Flex alignItems="center" mt="20px">
+                    <ChakraLink href={product.productLink as string} isExternal>
+                      <Heading size="md" cursor="pointer">
+                        {product.title}
+                      </Heading>
+                    </ChakraLink>
+                    <Icon as={RiExternalLinkFill} fontSize="20px" ml="4px" />
+                  </Flex>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           )}
         </Box>
       </Grid>
@@ -362,17 +342,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   const prismic = getPrismicClient(req);
 
   const response = await prismic.getByUID("produto", String(slug), {});
-
-  const product = {
+  console.log(response.data);
+  let product: Product = {
     slug,
     title: response.data.titulo[0].text,
     description: RichText.asHtml(response.data.descricao),
     price: response.data.preco,
     stripeUrl: response.data.pagamento.url,
-    qrCode: {
-      imageUrl: response.data.qrcode.url,
-      code: response.data.qrcode.alt,
-    },
     updatedAt: new Date(
       response.last_publication_date as string
     ).toLocaleDateString("pt-BR", {
@@ -382,6 +358,19 @@ export const getServerSideProps: GetServerSideProps = async ({
     }),
     images: Object.values(response.data.imagens[0]),
   };
+  let qrCode;
+  if (response.data.qrcode.alt) {
+    qrCode = {
+      imageUrl: response.data.qrcode.url,
+      code: response.data.qrcode.alt,
+    };
+    product = { ...product, qrCode };
+  }
+  let productLink;
+  if (response.data.link_de_download.url) {
+    productLink = response.data.link_de_download.url;
+    product = { ...product, productLink };
+  }
 
   return {
     props: {
