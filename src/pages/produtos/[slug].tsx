@@ -95,27 +95,26 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
         <Link href="/produtos">Produtos</Link> <Icon as={RiArrowRightSLine} />{" "}
         {product.title}{" "}
       </Flex>
-      <Grid gridTemplateColumns={["1fr", "1fr", "1fr", "1.5fr 2fr"]} gap="30px">
-        <Container maxW={["320px", "350px", "400px", "400px"]}>
+      <Grid
+        gridTemplateColumns={["1fr", "1fr", "1fr", "1.5fr 1.2fr"]}
+        gap="30px"
+      >
+        <Container maxW={["320px", "350px", "500px", "500px"]}>
           <CarouselProvider
             naturalSlideWidth={1080}
             naturalSlideHeight={1350}
             totalSlides={product.images.length}
           >
             <Slider>
-              {product.images.map((image, index) => {
-                if (image.url) {
-                  return (
-                    <Slide key={image.url} index={index}>
-                      <Image src={image.url} alt={image.alt} w={375} />
-                    </Slide>
-                  );
-                }
-              })}
+              {product.images.map((image, index) => (
+                <Slide key={image.url} index={index}>
+                  <Image src={image.url} alt={image.alt} w={500} />
+                </Slide>
+              ))}
             </Slider>
             <Flex
               justifyContent="center"
-              maxW={["320px", "350px", "400px", "400px"]}
+              maxW={["320px", "350px", "500px", "500px"]}
               mt="10px"
             >
               <ButtonBack>
@@ -139,6 +138,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
           <Box
             as="div"
             ml={["10px", "10px", "10px", "0"]}
+            textAlign="justify"
             dangerouslySetInnerHTML={{ __html: product.description }}
           />
 
