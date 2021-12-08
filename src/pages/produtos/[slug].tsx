@@ -61,8 +61,8 @@ interface Product {
   title: string;
   description: string;
   price: number;
-  stripeUrl: string;
-  qrCode?: { imageUrl?: string; code?: string };
+  stripeUrl?: string;
+  qrCode?: { imageUrl: string; code: string };
   productLink?: string;
   slug: string;
   updatedAt: string;
@@ -76,7 +76,9 @@ interface SingleProductPageProps {
 export default function SingleProductPage({ product }: SingleProductPageProps) {
   const [showQRCode, setShowQRCode] = useState(false);
 
-  const { hasCopied, onCopy } = useClipboard(product.qrCode?.code);
+  const { hasCopied, onCopy } = useClipboard(
+    product.qrCode ? product.qrCode?.code : ""
+  );
 
   return (
     <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
@@ -98,30 +100,18 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
           <CarouselProvider
             naturalSlideWidth={1080}
             naturalSlideHeight={1350}
-            totalSlides={3}
+            totalSlides={product.images.length}
           >
             <Slider>
-              <Slide index={0}>
-                <Image
-                  src={product.images[0].url}
-                  alt={product.images[0].alt}
-                  w={375}
-                />
-              </Slide>
-              <Slide index={1}>
-                <Image
-                  src={product.images[1].url}
-                  alt={product.images[0].alt}
-                  w={375}
-                />
-              </Slide>
-              <Slide index={2}>
-                <Image
-                  src={product.images[2].url}
-                  alt={product.images[0].alt}
-                  w={375}
-                />
-              </Slide>
+              {product.images.map((image, index) => {
+                if (image.url) {
+                  return (
+                    <Slide key={image.url} index={index}>
+                      <Image src={image.url} alt={image.alt} w={375} />
+                    </Slide>
+                  );
+                }
+              })}
             </Slider>
             <Flex
               justifyContent="center"
@@ -152,7 +142,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
             dangerouslySetInnerHTML={{ __html: product.description }}
           />
 
-          {product.price > 0 ? (
+          {product.price > 0 && product.stripeUrl ? (
             <>
               <Link href={product.stripeUrl} passHref>
                 <Button
@@ -343,12 +333,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const response = await prismic.getByUID("produto", String(slug), {});
   console.log(response.data);
+
+  const images = Object.values(response.data.imagens[0]) as Image[];
+  const filteredImages = images.filter((image) => !!image.url);
+
   let product: Product = {
     slug,
     title: response.data.titulo[0].text,
     description: RichText.asHtml(response.data.descricao),
     price: response.data.preco,
-    stripeUrl: response.data.pagamento.url,
     updatedAt: new Date(
       response.last_publication_date as string
     ).toLocaleDateString("pt-BR", {
@@ -356,8 +349,14 @@ export const getServerSideProps: GetServerSideProps = async ({
       month: "long",
       year: "numeric",
     }),
-    images: Object.values(response.data.imagens[0]),
+    images: filteredImages,
   };
+
+  let stripeUrl;
+  if (response.data.qrcode.alt) {
+    (stripeUrl = response.data.pagamento.url),
+      (product = { ...product, stripeUrl });
+  }
   let qrCode;
   if (response.data.qrcode.alt) {
     qrCode = {
