@@ -23,19 +23,17 @@ export default function AboutPage() {
         <Image src="./bio.JPG" alt=""></Image>
         <Stack spacing="20px" mx={["20px", "0", "0", "0"]} textAlign="justify">
           <Text>
-            Olá! Eu me chamo Lia Motta. Sou criadora de conteúdo, vegana há mais
+            Oiê! Eu me chamo Lia Motta. Sou criadora de conteúdo, vegana há mais
             de cinco anos, escritora assídua de diário, amante de doramas e
-            k-pop, e cultivo um grande interesse sobre a criação de hábitos que
-            alimento por meio de minhas leituras.
+            k-pop, e cultivo um grande interesse sobre tudo que envolva hábitos
+            incríveis, autoconhecimento e bem-estar.
           </Text>
-
           <Text>
             Nasci em julho de 1999 e, desde muito cedo, já gostava de criar
             comunidades (os vários clubinhos quando criança) e de compartilhar
             minhas ideias e conhecimentos (alô bloguinhos que tive na
             adolescência).
           </Text>
-
           <Text>
             Durante minha vida, passei por muitas coisas complicadas como
             bullying, tricotilomania, depressão, compulsão alimentar e
@@ -46,7 +44,6 @@ export default function AboutPage() {
             minha autoconfiança era ruim demais, pois acreditava que eu não era
             capaz de conquistar nada na minha vida.
           </Text>
-
           <Text>
             Porém, tudo isso começou a mudar em novembro de 2020, quando
             compreendi que precisava começar a me priorizar, me cuidar, e
