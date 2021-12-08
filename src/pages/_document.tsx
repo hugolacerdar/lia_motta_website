@@ -17,6 +17,7 @@ export default class MyDocument extends Document {
             href="https://fontlibrary.org//face/miedinger"
             type="text/css"
           />
+          <link rel="shortcut icon" href="/favicon/4.png" type="image/png" />
         </Head>
         <body>
           <Main />
