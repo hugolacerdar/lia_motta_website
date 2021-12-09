@@ -8,6 +8,7 @@ import {
   useToast,
   Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface MessageData {
@@ -17,6 +18,8 @@ interface MessageData {
 }
 
 export default function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const toast = useToast();
   const emailAddressPattern =
     // eslint-disable-next-line no-control-regex
@@ -54,7 +57,8 @@ export default function ContactForm() {
   const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
 
-  const onSubmit = async (data: MessageData): Promise<void> => {
+  const onSubmit = (data: MessageData): void => {
+    setIsSubmitting(true);
     fetch("/api/contact", {
       method: "POST",
       headers: {
@@ -63,7 +67,6 @@ export default function ContactForm() {
       },
       body: JSON.stringify(data),
     }).then((res) => {
-      console.log("response", res);
       if (res.status === 200) {
         toast({
           status: "success",
@@ -79,6 +82,7 @@ export default function ContactForm() {
           description: "Desculpe. Ocorreu algum erro. Tente novamente.",
         });
       }
+      setIsSubmitting(false);
     });
   };
   return (
@@ -158,8 +162,8 @@ export default function ContactForm() {
         _focus={{ outline: "none" }}
         padding="35px"
         w="100%"
-        isLoading={formState.isSubmitting}
-        isDisabled={formState.isSubmitting}
+        isLoading={isSubmitting}
+        isDisabled={isSubmitting}
         onClick={() => console.log("")}
       >
         ENVIAR
