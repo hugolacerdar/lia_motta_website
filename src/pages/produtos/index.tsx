@@ -44,11 +44,11 @@ export default function ProductsPage({ products }: ProductsPageProps) {
 
       <Grid
         templateColumns={["1fr", "1fr 1fr", "repeat(3, 1fr)"]}
-        gap={["20px", "30px", "100px"]}
+        gap={["40px", "50px", "100px"]}
         align="center"
         justify="center"
         px={["30px", "0"]}
-        mt="50px"
+        my="50px"
       >
         {products.map((p) => (
           <ProductCard
