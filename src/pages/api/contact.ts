@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const transporter = nodemailer.createTransport({
     port: 465,
     host: "smtp.gmail.com",
@@ -20,11 +20,14 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     html: `<div>${req.body.message}</div><p>Enviada por:
       ${req.body.email}</p>`,
   };
+
   transporter.sendMail(mailData, function (err, info) {
-    if (err) console.log(err);
-    else console.log(info);
+    if (err) {
+      res.send("error" + JSON.stringify(err));
+    } else {
+      res.send("success");
+    }
   });
-  res.status(200);
 };
 
 export default handler;

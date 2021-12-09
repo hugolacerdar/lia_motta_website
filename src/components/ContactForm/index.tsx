@@ -63,6 +63,7 @@ export default function ContactForm() {
       },
       body: JSON.stringify(data),
     }).then((res) => {
+      console.log("response", res);
       if (res.status === 200) {
         toast({
           status: "success",
