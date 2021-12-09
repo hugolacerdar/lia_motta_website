@@ -63,12 +63,16 @@ export default function ContactForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }).then((res) => {
-        console.log("Response received");
-        if (res.status === 200) {
-          console.log("Response succeeded!");
-        }
-      });
+      })
+        .then((res) => {
+          console.log("Response received");
+          if (res.status === 200) {
+            console.log("Response succeeded!");
+          }
+        })
+        .catch((error) => {
+          throw new Error(error.message);
+        });
 
       toast({
         status: "success",
