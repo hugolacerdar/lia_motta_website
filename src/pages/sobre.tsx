@@ -21,7 +21,12 @@ export default function AboutPage() {
 
       <Grid gridTemplateColumns={["1fr", "1fr", "1fr", "1.5fr 2fr"]} gap="30px">
         <Image src="./bio.JPG" alt=""></Image>
-        <Stack spacing="20px" mx={["20px", "0", "0", "0"]} textAlign="justify">
+        <Stack
+          spacing="20px"
+          mx={["20px", "0", "0", "0"]}
+          textAlign="justify"
+          mb="50px"
+        >
           <Text>
             Oiê! Eu me chamo Lia Motta. Sou criadora de conteúdo, vegana há mais
             de cinco anos, escritora assídua de diário, amante de doramas e
