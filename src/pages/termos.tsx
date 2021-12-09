@@ -48,9 +48,13 @@ export default function TermsPage() {
           email para contato@liamotta.com detalhando sua situação;
         </ListItem>
         <ListItem>
+          O envio dos produtos é realizado dentro de 24 horas a partir da
+          confirmação do pagamento, tanto para as compras com cartão, quanto
+          para as via PIX.
+        </ListItem>
+        <ListItem>
           Caso você efetue sua compra via PIX, não se esqueça de enviar o
-          comprovante para contato@liamotta.com para que possamos te enviar o
-          produto. O envio ocorre em até 24 horas após o envio do comprovante.
+          comprovante para contato@liamotta.com.
         </ListItem>
       </OrderedList>{" "}
     </Box>
