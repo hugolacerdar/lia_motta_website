@@ -55,40 +55,30 @@ export default function ContactForm() {
   const { errors } = formState;
 
   const onSubmit = async (data: MessageData): Promise<void> => {
-    try {
-      fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          console.log("Response received");
-          if (res.status === 200) {
-            console.log("Response succeeded!");
-          }
-        })
-        .catch((error) => {
-          throw new Error(error.message);
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status === 200) {
+        toast({
+          status: "success",
+          title: "Mensagem enviada!",
+          description:
+            "Obrigada! Sua mensagem foi enviada! Te responderei assim que possível.",
         });
-
-      toast({
-        status: "success",
-        title: "Mensagem enviada!",
-        description:
-          "Obrigada! Sua mensagem foi enviada! Te responderei assim que possível.",
-      });
-    } catch {
-      toast({
-        status: "error",
-        title: "Mensagem não enviada.",
-        description: "Desculpe. Ocorreu algum erro. Tente novamente.",
-      });
-    } finally {
-      reset();
-    }
+        reset();
+      } else {
+        toast({
+          status: "error",
+          title: "Mensagem não enviada.",
+          description: "Desculpe. Ocorreu algum erro. Tente novamente.",
+        });
+      }
+    });
   };
   return (
     <Stack
