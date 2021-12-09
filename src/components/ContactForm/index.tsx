@@ -11,7 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 
 interface MessageData {
-  fullName: string;
+  name: string;
   email: string;
   message: string;
 }
@@ -23,32 +23,30 @@ export default function ContactForm() {
     /(?:[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
 
   const formValidations = {
-    fullName: {
-      required: "Don't forget to add your full name!",
+    name: {
+      required: "Não esqueça de preencher seu nome.",
       minLength: {
         value: 2,
-        message:
-          "Is your full name really that short? The minimal number of characters is 2.",
+        message: "O número mínimo de caracteres é 2.",
       },
       maxLength: {
         value: 31,
-        message:
-          "Hey, the maximum number of characters is 31. Can you please abbreviate your name?",
+        message: "O número máximo de caracteres é 31",
       },
     },
     email: {
-      required: "Please fill in using your preferred email address.",
+      required: "Por favor, preencha utilizando o seu email favorito.",
       validate: {
         acceptedFormats: (value: string) =>
           emailAddressPattern.test(value) ||
-          "Invalid email format. Please check if you missed something.",
+          "Formato de email inválido. Por favor, cheque se esqueceu de algo.",
       },
     },
     message: {
-      required: "Are you forgetting to type the message?",
+      required: "Parece que esqueceu de preencher sua mensagem.",
       minLength: {
         value: 20,
-        message: "The minimal number of characters is 20",
+        message: "O número mínimo de caracteres é 20.",
       },
     },
   };
@@ -58,18 +56,31 @@ export default function ContactForm() {
 
   const onSubmit = async (data: MessageData): Promise<void> => {
     try {
+      fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => {
+        console.log("Response received");
+        if (res.status === 200) {
+          console.log("Response succeeded!");
+        }
+      });
+
       toast({
         status: "success",
-        title: "Message sent",
+        title: "Mensagem enviada!",
         description:
-          "Thank you! Your message has been sent! I will get back to you as soon as I can.",
+          "Obrigada! Sua mensagem foi enviada! Te responderei assim que possível.",
       });
     } catch {
       toast({
         status: "error",
-        title: "Message failed.",
-        description:
-          "Some error occurred when trying to send the message. Please try again.",
+        title: "Mensagem não enviada.",
+        description: "Desculpe. Ocorreu algum erro. Tente novamente.",
       });
     } finally {
       reset();
@@ -85,8 +96,8 @@ export default function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormControl>
-        <FormLabel textTransform="uppercase" htmlFor="full-name">
-          Full Name
+        <FormLabel textTransform="uppercase" htmlFor="name">
+          Nome
         </FormLabel>
         <Input
           variant="outline"
@@ -94,12 +105,12 @@ export default function ContactForm() {
           size="lg"
           _focus={{ outline: "none" }}
           _hover={{ outline: "none" }}
-          errors={errors.fullName}
-          {...register("fullName", formValidations.fullName)}
-          isInvalid={!!errors.fullName}
+          errors={errors.name}
+          {...register("name", formValidations.name)}
+          isInvalid={!!errors.name}
         />
         <Text color="red.300" fontSize="0.9rem" pt="5px">
-          {errors?.fullName?.message}
+          {errors?.name?.message}
         </Text>
       </FormControl>
       <FormControl>
@@ -122,7 +133,7 @@ export default function ContactForm() {
       </FormControl>
       <FormControl>
         <FormLabel textTransform="uppercase" htmlFor="message">
-          Message
+          Mensagem
         </FormLabel>
         <Textarea
           variant="outline"
@@ -156,7 +167,7 @@ export default function ContactForm() {
         isDisabled={formState.isSubmitting}
         onClick={() => console.log("")}
       >
-        SUBMIT
+        ENVIAR
       </Button>
     </Stack>
   );

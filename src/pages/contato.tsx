@@ -10,9 +10,6 @@ export default function ContactPage() {
       <Head>
         <title>Contato | Lia Motta</title>
       </Head>
-      <Head>
-        <title>Contato | Lia Motta</title>
-      </Head>
       <Flex
         alignItems="center"
         color="gray.500"

@@ -61,6 +61,7 @@ interface Product {
   title: string;
   description: string;
   price: number;
+  pixDiscount: number;
   stripeUrl?: string;
   qrCode?: { imageUrl: string; code: string };
   productLink?: string;
@@ -181,7 +182,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
                       w="100%"
                     >
                       <Box flex="1" textAlign="center" fontWeight="bold">
-                        COMPRAR VIA PIX - 5% de desconto
+                        COMPRAR VIA PIX - {product.pixDiscount}% de desconto
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
@@ -196,7 +197,9 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
                     <Text>
                       por:{" "}
                       <Text as="span" fontWeight="bold">
-                        {formatMoney(product.price * 0.95)}
+                        {formatMoney(
+                          product.price * (1.0 - product.pixDiscount / 100)
+                        )}
                       </Text>
                       <Text mt="20px" textAlign="justify">
                         No momento, estamos enviando manualmente o e-book por
@@ -241,7 +244,12 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
                         outline: "none",
                         backgroundColor: "gray.100",
                       }}
-                      _hover={{ backgroundColor: "gray.100" }}
+                      _hover={{
+                        backgroundColor: "gray.100",
+                        cursor: "pointer",
+                      }}
+                      onClick={onCopy}
+                      readOnly
                       value={product.qrCode.code}
                       isTruncated
                       borderTopRightRadius="0"
@@ -270,6 +278,20 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
               ) : (
                 ""
               )}
+              <Text>
+                * Ao comprar, você concorda com nossos{" "}
+                <Link href="/termos" passHref>
+                  <Text
+                    as="span"
+                    color="#78ab78"
+                    fontWeight="bold"
+                    cursor="pointer"
+                  >
+                    Termos de Compra
+                  </Text>
+                </Link>
+                .
+              </Text>
             </>
           ) : (
             <Accordion allowMultiple>
@@ -350,6 +372,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       year: "numeric",
     }),
     images: filteredImages,
+    pixDiscount: response.data.porcentagem_desconto_pix,
   };
 
   let stripeUrl;

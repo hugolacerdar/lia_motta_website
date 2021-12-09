@@ -1,15 +1,26 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, Container } from "@chakra-ui/layout";
 import { useRouter } from "next/router";
+import { HStack, Link, Icon, Text, Flex } from "@chakra-ui/react";
+import { RiInstagramLine } from "react-icons/ri";
+import { IoLogoTiktok } from "react-icons/io5";
 
 export default function Footer() {
   const { asPath } = useRouter();
 
   const isHome = asPath === "/";
 
-  return (
-    <>
-      {isHome ? <Box h="100vh" w="0" /> : ""}
-      <Box h="200px" pos="relative"></Box>
-    </>
-  );
+  const socialLinks = [
+    {
+      title: "Instagram",
+      icon: RiInstagramLine,
+      url: "https://www.instagram.com/sorrialia/",
+    },
+    {
+      title: "TikTok",
+      icon: IoLogoTiktok,
+      url: "https://www.tiktok.com/@sorrialia",
+    },
+  ];
+
+  return "";
 }

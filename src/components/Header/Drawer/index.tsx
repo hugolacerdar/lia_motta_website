@@ -21,6 +21,7 @@ export default function SideDrawer() {
             <NavLink href="/produtos">Produtos</NavLink>
             <NavLink href="/sobre">Sobre</NavLink>
             <NavLink href="/contato">Contato</NavLink>
+            <NavLink href="/termos">Termos de Compra</NavLink>
           </Stack>
         </DrawerContent>
       </DrawerOverlay>
