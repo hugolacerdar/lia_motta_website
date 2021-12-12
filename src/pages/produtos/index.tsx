@@ -28,7 +28,12 @@ interface ProductsPageProps {
 
 export default function ProductsPage({ products }: ProductsPageProps) {
   return (
-    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
+    <Box
+      maxW={["100vw", "90vw", "90vw", "70vw"]}
+      mx="auto"
+      minH="100vh"
+      mt="20px"
+    >
       <Head>
         <title>Shop | Lia Motta</title>
       </Head>
