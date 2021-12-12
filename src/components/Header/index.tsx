@@ -30,7 +30,7 @@ export default function Header() {
       <Flex
         align="center"
         ml="auto"
-        display={["none", "none", "block", "block"]}
+        display={["none", "none", "none", "block"]}
       >
         <HStack spacing="9" color={isHome ? "white" : "gray.900"}>
           <NavLink href="/" borderColor="white">
@@ -45,12 +45,12 @@ export default function Header() {
       <Flex
         align="flex-end"
         ml="auto"
-        display={["block", "block", "none", "none"]}
+        display={["block", "block", "block", "none"]}
         _focus={{ outline: "none" }}
       >
         <IconButton
           color={isHome ? "white" : "gray.900"}
-          display={["block", "block", "none", "none"]}
+          display={["block", "block", "block", "none"]}
           aria-label="Open navigation"
           icon={<Icon as={RiMenuLine} />}
           fontSize="24"
