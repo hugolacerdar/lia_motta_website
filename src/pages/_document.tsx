@@ -17,6 +17,8 @@ export default class MyDocument extends Document {
             href="https://fontlibrary.org//face/miedinger"
             type="text/css"
           />
+          {/* eslint-disable-next-line @next/next/no-css-tags */}
+          <link rel="stylesheet" href="scrollbar.css" />
           <link rel="shortcut icon" href="/favicon/4.png" type="image/png" />
         </Head>
         <body>
