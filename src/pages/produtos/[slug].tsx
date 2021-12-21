@@ -82,7 +82,12 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
   );
 
   return (
-    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
+    <Box
+      maxW={["100vw", "90vw", "90vw", "70vw"]}
+      mx="auto"
+      mt="20px"
+      minH="85vh"
+    >
       <Head>
         <title>{product.title} | Lia Motta</title>
       </Head>
@@ -354,7 +359,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const prismic = getPrismicClient(req);
 
   const response = await prismic.getByUID("produto", String(slug), {});
-  console.log(response.data);
 
   const images = Object.values(response.data.imagens[0]) as Image[];
   const filteredImages = images.filter((image) => !!image.url);

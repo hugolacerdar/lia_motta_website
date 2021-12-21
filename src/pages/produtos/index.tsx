@@ -31,7 +31,7 @@ export default function ProductsPage({ products }: ProductsPageProps) {
     <Box
       maxW={["100vw", "90vw", "90vw", "70vw"]}
       mx="auto"
-      minH="100vh"
+      minH="57vh"
       mt="20px"
     >
       <Head>

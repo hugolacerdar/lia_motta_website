@@ -13,7 +13,12 @@ import Link from "next/link";
 
 export default function TermsPage() {
   return (
-    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
+    <Box
+      maxW={["100vw", "90vw", "90vw", "70vw"]}
+      mx="auto"
+      mt="20px"
+      minH="57vh"
+    >
       <Head>
         <title>Termos de Compra | Lia Motta</title>
       </Head>

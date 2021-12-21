@@ -6,7 +6,12 @@ import ContactForm from "../components/ContactForm";
 
 export default function ContactPage() {
   return (
-    <Box maxW={["100vw", "90vw", "90vw", "70vw"]} mx="auto" mt="20px">
+    <Box
+      maxW={["100vw", "90vw", "90vw", "70vw"]}
+      mx="auto"
+      mt="20px"
+      minH="57vh"
+    >
       <Head>
         <title>Contato | Lia Motta</title>
       </Head>
