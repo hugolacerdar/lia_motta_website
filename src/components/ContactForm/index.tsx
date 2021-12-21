@@ -164,7 +164,6 @@ export default function ContactForm() {
         w="100%"
         isLoading={isSubmitting}
         isDisabled={isSubmitting}
-        onClick={() => console.log("")}
       >
         ENVIAR
       </Button>
