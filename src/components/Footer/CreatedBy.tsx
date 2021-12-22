@@ -7,7 +7,7 @@ export default function CreatedBy() {
         Desenvolvido por{" "}
         <ChakraLink
           _focus={{ outline: "none" }}
-          href="https://github.com/hugolacerdar"
+          href="https://www.hugolacerda.dev"
           isExternal
           fontWeight="bold"
         >
