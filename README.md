@@ -1,4 +1,4 @@
-# ![WebApp](./public/readme/banner.png)
+# ![Lia Motta Website Banner](./public/readme/banner.png)
 # Lia Motta's personal brand website
 <table>
 <tr>
