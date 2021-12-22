@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ![WebApp](./public/readme/banner.png)
+# Lia Motta's personal brand website
+<table>
+<tr>
+<td>
+  A personal website I developed for the content creator Lia Motta. Through her website, it is possible to get to know more about her, to get in touch using the contact form, and to take a look and buy any of her digital products, as well as find her at all the social networks she creates for.
+</td>
+</tr>
+</table>
 
-## Getting Started
 
-First, run the development server:
+## Live
+The project is live at :  https://www.liamotta.com/
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Site
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Landing Page
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![](./public/readme/landing.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Products
+![](./public/readme/products.png)
 
-## Learn More
+### Detail
+![](./public/readme/product_detail.png)
 
-To learn more about Next.js, take a look at the following resources:
+### About
+![](./public/readme/about.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Contact
+![](./public/readme/contact.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Purchase Terms
+![](./public/readme/terms.png)
 
-## Deploy on Vercel
+## Responsive
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![](./public/readme/responsive.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Built with 
+
+- [Next.js](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org)
+- [Chakra UI](https://chakra-ui.com) 
+- [Prismic](https://prismic.io)
