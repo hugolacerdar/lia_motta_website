@@ -187,25 +187,33 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
                       w="100%"
                     >
                       <Box flex="1" textAlign="center" fontWeight="bold">
-                        COMPRAR VIA PIX - {product.pixDiscount}% de desconto
+                        COMPRAR VIA PIX{" "}
+                        {product.pixDiscount > 0 &&
+                          `- ${product.pixDiscount}% de desconto`}
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
+                    {product.pixDiscount > 0 && (
+                      <>
+                        <Text>
+                          De:{" "}
+                          <Text as="span" textDecor="line-through">
+                            {formatMoney(product.price)}
+                          </Text>
+                        </Text>
+                        <Text>
+                          por:{" "}
+                          <Text as="span" fontWeight="bold">
+                            {formatMoney(
+                              product.price * (1.0 - product.pixDiscount / 100)
+                            )}
+                          </Text>{" "}
+                        </Text>
+                      </>
+                    )}
                     <Text>
-                      De:{" "}
-                      <Text as="span" textDecor="line-through">
-                        {formatMoney(product.price)}
-                      </Text>
-                    </Text>
-                    <Text>
-                      por:{" "}
-                      <Text as="span" fontWeight="bold">
-                        {formatMoney(
-                          product.price * (1.0 - product.pixDiscount / 100)
-                        )}
-                      </Text>
                       <Text mt="20px" textAlign="justify">
                         No momento, estamos enviando manualmente o e-book por
                         e-mail. Logo, solicitamos o envio do comprovante de
