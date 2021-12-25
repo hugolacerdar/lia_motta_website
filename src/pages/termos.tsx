@@ -50,8 +50,10 @@ export default function TermsPage() {
           </ListItem>
           <ListItem>
             O envio dos produtos é realizado dentro de 24 horas a partir da
-            confirmação do pagamento, tanto para as compras com cartão, quanto
-            para as via PIX.
+            confirmação do pagamento quando em dias úteis, tanto para as compras
+            com cartão, quanto para as via PIX. Já as compras realizadas nos
+            finais de semana ou feriados são enviadas dentro do próximo dia
+            útil.
           </ListItem>
           <ListItem>
             Caso você efetue sua compra via PIX, não se esqueça de enviar o
