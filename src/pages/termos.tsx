@@ -38,26 +38,28 @@ export default function TermsPage() {
           seguintes políticas:
         </Text>
         <OrderedList textAlign="justify" fontSize="lg">
+          <ListItem>Todos os produtos são digitais;</ListItem>
           <ListItem>
-            Todos os produtos são digitais, mas também podem ser utilizados
-            impressos, caso prefira;
+            Não autorizamos o compartilhamento de qualquer produto;
           </ListItem>
-          <ListItem>Não aceitamos devoluções;</ListItem>
-          <ListItem>Não aceitamos cancelamentos;</ListItem>
+          <ListItem>
+            Ao comprar pela plataforma Mercado Pago, caso o pagamento ocorra com
+            sucesso, clicando no botão {`"Voltar para o site"`}, você será
+            redirecionada para o produto. É muito importante que salve o arquivo
+            em seu dispositivo nessa etapa;
+          </ListItem>
           <ListItem>
             Caso você tenha qualquer dificuldade em acessar sua compra mande um
             email para contato@liamotta.com detalhando sua situação;
           </ListItem>
           <ListItem>
-            O envio dos produtos é realizado dentro de 24 horas a partir da
-            confirmação do pagamento quando em dias úteis, para qualquer metóddo
-            de pagamento.
+            Nosso atendimento funciona de segunda a sexta, das 09h00 às 18h00,
+            exclusivamente pelo e-mail contato@liamotta.com, pois não resolvemos
+            situações relacionadas a compras no site por outros canais;
           </ListItem>
-          <ListItem>
-            As compras realizadas nos finais de semana ou feriados serão
-            enviadas dentro do próximo dia útil.
-          </ListItem>
-        </OrderedList>{" "}
+          <ListItem>Não aceitamos devoluções;</ListItem>
+          <ListItem>Não aceitamos cancelamentos.</ListItem>
+        </OrderedList>
       </Box>
     </Box>
   );
