@@ -43,19 +43,18 @@ export default function TermsPage() {
             Não autorizamos o compartilhamento de qualquer produto;
           </ListItem>
           <ListItem>
-            Ao comprar pela plataforma Mercado Pago, caso o pagamento ocorra com
-            sucesso, clicando no botão {`"Voltar para o site"`}, você será
-            redirecionada para o produto. É muito importante que salve o arquivo
-            em seu dispositivo nessa etapa;
-          </ListItem>
-          <ListItem>
-            Caso você tenha qualquer dificuldade em acessar sua compra mande um
-            email para contato@liamotta.com detalhando sua situação;
+            Após a aprovação do pagamento, o produto será enviado em até 24
+            horas quando em dias úteis ou no próximo dia útil aos finais de
+            semana e feriados.
           </ListItem>
           <ListItem>
             Nosso atendimento funciona de segunda a sexta, das 09h00 às 18h00,
             exclusivamente pelo e-mail contato@liamotta.com, pois não resolvemos
             situações relacionadas a compras no site por outros canais;
+          </ListItem>
+          <ListItem>
+            Caso você tenha qualquer dificuldade em acessar sua compra mande um
+            email para contato@liamotta.com detalhando sua situação;
           </ListItem>
           <ListItem>Não aceitamos devoluções;</ListItem>
           <ListItem>Não aceitamos cancelamentos.</ListItem>
