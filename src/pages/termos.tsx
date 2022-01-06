@@ -43,9 +43,9 @@ export default function TermsPage() {
             Não autorizamos o compartilhamento de qualquer produto;
           </ListItem>
           <ListItem>
-            Após a aprovação do pagamento, o produto será enviado em até 24
-            horas quando em dias úteis ou no próximo dia útil aos finais de
-            semana e feriados.
+            Após a aprovação do pagamento, o produto será enviado por e-mail em
+            até 24 horas quando em dias úteis ou no próximo dia útil aos finais
+            de semana e feriados.
           </ListItem>
           <ListItem>
             Nosso atendimento funciona de segunda a sexta, das 09h00 às 18h00,
