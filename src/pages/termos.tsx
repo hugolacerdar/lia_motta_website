@@ -57,7 +57,7 @@ export default function TermsPage() {
             email para contato@liamotta.com detalhando sua situação;
           </ListItem>
           <ListItem>Não aceitamos devoluções;</ListItem>
-          <ListItem>Não aceitamos cancelamentos.</ListItem>
+          <ListItem>Não realizamos reembolsos.</ListItem>
         </OrderedList>
       </Box>
     </Box>
