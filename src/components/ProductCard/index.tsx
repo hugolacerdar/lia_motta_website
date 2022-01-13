@@ -26,17 +26,33 @@ export default function ProductCard({
   images,
 }: ProductCardProps) {
   const [image, setImage] = useState(images[0]);
+  const [opacity, setOpacity] = useState("1");
+  const [filter, setFilter] = useState("none");
+
+  function imageTransition() {
+    let switchImage = image === images[0] ? images[1] : images[0];
+
+    setFilter("blur(2px)");
+    setTimeout(() => {
+      setImage(switchImage);
+      setFilter("none");
+    }, 200);
+  }
 
   return (
     <Box overflow="hidden" borderRadius="3px">
       <Image
         src={image.url}
-        onMouseEnter={() => setImage(images[1])}
-        onMouseLeave={() => setImage(images[0])}
+        onMouseEnter={imageTransition}
+        onMouseLeave={imageTransition}
         alt={image.alt}
         w="100%"
         bg="white"
+        opacity={opacity}
+        filter={filter}
+        transition="filter 200ms"
       />
+
       <Flex
         pt="3"
         align="center"
