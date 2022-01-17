@@ -5,8 +5,8 @@ import {
   DrawerCloseButton,
   Stack,
 } from "@chakra-ui/react";
-import { useDrawer } from "../../../contexts/DrawerContext";
-import NavLink from "../NavLink";
+import { useDrawer } from "../contexts/DrawerContext";
+import NavLink from "./NavLink";
 
 export default function SideDrawer() {
   const { isOpen, onClose } = useDrawer();

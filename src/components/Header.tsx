@@ -5,8 +5,7 @@ import { useRouter } from "next/router";
 
 import NavLink from "./NavLink";
 import Logo from "./Logo";
-import SideDrawer from "./Drawer";
-import { useDrawer } from "../../contexts/DrawerContext";
+import { useDrawer } from "../contexts/DrawerContext";
 
 export default function Header() {
   const { asPath } = useRouter();

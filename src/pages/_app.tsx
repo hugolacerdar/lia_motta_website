@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import SideDrawer from "../components/Header/Drawer";
+import SideDrawer from "../components/Drawer";
 import { DrawerProvider } from "../contexts/DrawerContext";
 import { theme } from "../styles/theme";
 import NProgress from "nprogress";
