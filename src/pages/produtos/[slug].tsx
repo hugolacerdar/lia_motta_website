@@ -1,27 +1,5 @@
 import { Image } from "@chakra-ui/image";
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Container,
-  Flex,
-  Icon,
-  Grid,
-  Box,
-  Heading,
-  Button,
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-  AccordionIcon,
-  Text,
-  FormControl,
-  FormLabel,
-  Switch,
-  Link as ChakraLink,
-  useClipboard,
-} from "@chakra-ui/react";
+import { Container, Flex, Icon, Grid, Box, Heading } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { RichText } from "prismic-dom";
 import {
@@ -33,26 +11,20 @@ import {
 } from "pure-react-carousel";
 import Link from "next/link";
 import Head from "next/head";
-import {
-  RiArrowLeftSLine,
-  RiArrowRightSLine,
-  RiCheckLine,
-  RiFileCopyLine,
-  RiExternalLinkFill,
-  RiQrCodeFill,
-} from "react-icons/ri";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { ParsedUrlQuery } from "querystring";
 
 import { getPrismicClient } from "../../services/prismic";
 import formatMoney from "../../utils/formatMoney";
-import { useState } from "react";
+import FreeProductAccordion from "../../components/FreeProductAccordion";
+import PaymentButton from "../../components/PaymentButton";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
 }
-interface Image {
+interface ImageData {
   dimensions: { width: number; height: number };
   alt: string;
   url: string;
@@ -67,7 +39,7 @@ interface Product {
   productLink?: string;
   slug: string;
   updatedAt: string;
-  images: Image[];
+  images: ImageData[];
 }
 
 interface SingleProductPageProps {
@@ -125,7 +97,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
               </ButtonNext>
             </Flex>
           </CarouselProvider>
-        </Container>
+        </Container>{" "}
         <Box mx={["10px", "10px", "10px", "0"]}>
           <Flex justifyContent="space-between">
             <Heading size="lg" mb="20px">
@@ -143,85 +115,9 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
           />
 
           {product.price > 0 && product.stripeUrl ? (
-            <>
-              <Link href={product.stripeUrl} passHref>
-                <Button
-                  mt="30px"
-                  color="white"
-                  bgColor="gray.900"
-                  _hover={{
-                    bgColor: "white",
-                    color: "gray.900",
-                    borderColor: "gray.900",
-                    border: "1px",
-                  }}
-                  _focus={{ outline: "none" }}
-                  padding="35px"
-                  w="100%"
-                >
-                  COMPRAR AGORA
-                </Button>
-              </Link>
-              <Text>
-                * Ao comprar, você concorda com nossos{" "}
-                <Link href="/termos" passHref>
-                  <Text
-                    as="span"
-                    color="#78ab78"
-                    fontWeight="bold"
-                    cursor="pointer"
-                  >
-                    Termos de Compra
-                  </Text>
-                </Link>
-                .
-              </Text>
-            </>
+            <PaymentButton product={product} />
           ) : (
-            <Accordion allowMultiple>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton
-                    borderRadius="var(--chakra-radii-md)"
-                    mt="20px"
-                    color="white"
-                    bgColor="gray.900"
-                    _hover={{
-                      bgColor: "white",
-                      color: "gray.900",
-                      borderColor: "gray.900",
-                      border: "1px",
-                    }}
-                    _focus={{ outline: "none" }}
-                    padding="25px"
-                    w="100%"
-                  >
-                    <Box
-                      flex="1"
-                      textAlign="center"
-                      fontWeight="bold"
-                      textTransform="uppercase"
-                    >
-                      QUERO BAIXAR GRATUITAMENTE
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Text mt="30px">
-                    Clique no nome dos arquivos que deseja acessar:
-                  </Text>
-                  <Flex alignItems="center" mt="20px">
-                    <ChakraLink href={product.productLink as string} isExternal>
-                      <Heading size="md" cursor="pointer">
-                        {product.title}
-                      </Heading>
-                    </ChakraLink>
-                    <Icon as={RiExternalLinkFill} fontSize="20px" ml="4px" />
-                  </Flex>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
+            <FreeProductAccordion product={product} />
           )}
         </Box>
       </Grid>
@@ -238,8 +134,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const prismic = getPrismicClient(req);
 
   const response = await prismic.getByUID("produto", String(slug), {});
-
-  const images = Object.values(response.data.imagens[0]) as Image[];
+  const images = Object.values(response.data.imagens[0]) as ImageData[];
   const filteredImages = images.filter((image) => !!image.url);
 
   let product: Product = {
