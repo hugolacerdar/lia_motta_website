@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { RiCheckLine, RiFileCopyLine, RiQrCodeFill } from "react-icons/ri";
-import formatMoney from "../../utils/formatMoney";
+import formatMoney from "../utils/formatMoney";
 
 interface Product {
   title: string;
