@@ -1,15 +1,6 @@
-import { Box, Container } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import { useRouter } from "next/router";
-import {
-  HStack,
-  Center,
-  Link as ChakraLink,
-  Icon,
-  Text,
-  Flex,
-  Heading,
-  Grid,
-} from "@chakra-ui/react";
+import { HStack, Center, Link as ChakraLink, Icon } from "@chakra-ui/react";
 import { RiInstagramLine } from "react-icons/ri";
 import { IoLogoTiktok, IoLogoInstagram, IoLogoYoutube } from "react-icons/io5";
 import CreatedBy from "./CreatedBy";
