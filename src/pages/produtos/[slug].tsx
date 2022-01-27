@@ -167,12 +167,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     product = { ...product, qrCode };
   }
 
-  let productLink;
-  if (response.data.link_de_download.url && product.price === 0) {
-    productLink = response.data.link_de_download.url;
-    product = { ...product, productLink };
-  }
-
   return {
     props: {
       product,
