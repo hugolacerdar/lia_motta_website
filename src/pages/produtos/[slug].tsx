@@ -154,10 +154,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 
   let stripeUrl;
-  if (response.data.qrcode.alt) {
-    (stripeUrl = response.data.pagamento.url),
-      (product = { ...product, stripeUrl });
+  if (response.data.pagamento.url) {
+    stripeUrl = response.data.pagamento.url;
+    product = { ...product, stripeUrl };
   }
+  
   let qrCode;
   if (response.data.qrcode.alt) {
     qrCode = {
