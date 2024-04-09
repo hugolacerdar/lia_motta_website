@@ -22,48 +22,17 @@ export default function AboutPage() {
       <Grid gridTemplateColumns={["1fr", "1fr", "1fr", "1.5fr 2fr"]} gap="30px">
         <Image src="./bio.JPG" alt=""></Image>
         <Stack
+          fontSize={["18px", "20px", "22px", "24px"]}
           spacing="20px"
           mx={["20px", "0", "0", "0"]}
           textAlign="justify"
           mb="50px"
         >
           <Text>
-            Oiê! Eu me chamo Lia Motta. Sou criadora de conteúdo, vegana há mais
-            de cinco anos, escritora assídua de diário, amante de doramas e
-            k-pop, e cultivo um grande interesse sobre tudo que envolva hábitos
-            incríveis, autoconhecimento e bem-estar.
+              Nascida em julho de 1999, sou uma vegana apaixonada por k-pop e k-dramas, sempre com um livro por perto. A maternidade me apresentou ao Conrado, minha maior inspiração. Por mais de sete anos, a escrita de diários tem sido minha fiel companheira, uma ferramenta essencial na minha jornada com depressão e TDAH. Esta prática não só me oferece clareza e conforto, mas também inspirou a criação de um e-book destinado a orientar e inspirar outros na arte da escrita reflexiva.
           </Text>
           <Text>
-            Nasci em julho de 1999 e, desde muito cedo, já gostava de criar
-            comunidades (os vários clubinhos quando criança) e de compartilhar
-            minhas ideias e conhecimentos (alô bloguinhos que tive na
-            adolescência).
-          </Text>
-          <Text>
-            Durante minha vida, passei por muitas coisas complicadas como
-            bullying, tricotilomania, depressão, compulsão alimentar e
-            ortorexia. E, até meados de 2020, eu não conseguia enxergar muito
-            futuro para mim. Costumava ser muito sedentária, extremamente
-            ansiosa e procrastinadora, passando grande parte do meu tempo vendo
-            vidas alheias na internet ao invés de focar em mim. Além disso,
-            minha autoconfiança era ruim demais, pois acreditava que eu não era
-            capaz de conquistar nada na minha vida.
-          </Text>
-          <Text>
-            Porém, tudo isso começou a mudar em novembro de 2020, quando
-            compreendi que precisava começar a me priorizar, me cuidar, e
-            investir minha energia e tempo em mim. A partir de então, comecei a
-            mudar, sair da minha zona de conforto, e entrei na jornada mais
-            linda e estranha de toda minha vida. Esta jornada envolvia uma
-            mudança radical em meus hábitos, escolhas, comportamentos, e
-            pensamentos. Hoje, sinto do fundo do meu coração que estou cada dia
-            mais conectada com minha autêntica versão e construindo a vida dos
-            meus sonhos, pois, com o tempo, fui compreendendo que meu propósito
-            aqui na Terra é ajudar os outros a também vivenciarem essa
-            transformação. Por isso, resolvi começar a partilhar minha sincera
-            evolução pessoal, minha jornada de autoconhecimento e bem-estar a
-            fim de poder, de algum modo, motivar e incentivar outras pessoas em
-            suas jornadas de crescimento, conhecimento e cuidado.
+              Estudante de psicologia e amante dos pequenos prazeres encontrados em cafés, minha vida é um constante aprendizado sobre mim mesma e sobre como ajudar os outros. Através da escrita, eu me desvendo e compartilho essas descobertas, espero que meu e-book possa ser uma luz para quem busca autoconhecimento e expressão.
           </Text>
         </Stack>
       </Grid>

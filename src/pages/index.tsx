@@ -5,7 +5,7 @@ import Head from "next/head";
 const Home: NextPage = () => {
   return (
     <Box
-      bgImg="url('/capa1.jpeg')"
+      bgImg="url('/capa-1.png')"
       bgSize="cover"
       bgPos="center"
       bgRepeat="no-repeat"
