@@ -158,7 +158,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     stripeUrl = response.data.pagamento.url;
     product = { ...product, stripeUrl };
   }
-  
+
   let qrCode;
   if (response.data.qrcode.alt) {
     qrCode = {
@@ -166,6 +166,12 @@ export const getServerSideProps: GetServerSideProps = async ({
       code: response.data.qrcode.alt,
     };
     product = { ...product, qrCode };
+  }
+
+  let productLink;
+  if (response.data.cortesia.url) {
+    productLink = response.data.cortesia.url;
+    product = { ...product, productLink };
   }
 
   return {
