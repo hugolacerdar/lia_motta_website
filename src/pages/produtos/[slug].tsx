@@ -1,5 +1,4 @@
-import { Image } from "@chakra-ui/image";
-import { Container, Flex, Icon, Grid, Box, Heading } from "@chakra-ui/react";
+import { Container, Flex, Icon, Grid, Box, Heading, Image } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { RichText } from "prismic-dom";
 import {
@@ -55,7 +54,7 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
       minH="85vh"
     >
       <Head>
-        <title>{product.title} | Lia Motta</title>
+        <title>{`${product.title} | Lia Motta`}</title>
       </Head>
       <Flex
         alignItems="center"
@@ -63,9 +62,14 @@ export default function SingleProductPage({ product }: SingleProductPageProps) {
         marginBottom="30px"
         ml={["10px", "10px", "10px", "0"]}
       >
-        <Link href="/">Início</Link> <Icon as={RiArrowRightSLine} />{" "}
-        <Link href="/produtos">Produtos</Link> <Icon as={RiArrowRightSLine} />{" "}
-        {product.title}{" "}
+        <Link href="/" legacyBehavior>
+          <a>Início</a>
+        </Link>{" "}
+        <Icon as={RiArrowRightSLine} />{" "}
+        <Link href="/produtos" legacyBehavior>
+          <a>Produtos</a>
+        </Link>{" "}
+        <Icon as={RiArrowRightSLine} /> {product.title}{" "}
       </Flex>
       <Grid
         gridTemplateColumns={["1fr", "1fr", "1fr", "1.5fr 1.2fr"]}
@@ -131,52 +135,58 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const { slug } = params as Params;
 
-  const prismic = getPrismicClient(req);
+  const client = getPrismicClient(req);
 
-  const response = await prismic.getByUID("produto", String(slug), {});
-  const images = Object.values(response.data.imagens[0]) as ImageData[];
-  const filteredImages = images.filter((image) => !!image.url);
+  try {
+    const response = await client.getByUID('produto', String(slug));
+    const images = Object.values(response.data.imagens[0]) as ImageData[];
+    const filteredImages = images.filter((image) => !!image.url);
 
-  let product: Product = {
-    slug,
-    title: response.data.titulo[0].text,
-    description: RichText.asHtml(response.data.descricao),
-    price: response.data.preco,
-    updatedAt: new Date(
-      response.last_publication_date as string
-    ).toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    }),
-    images: filteredImages,
-    pixDiscount: response.data.porcentagem_desconto_pix,
-  };
-
-  let stripeUrl;
-  if (response.data.pagamento.url) {
-    stripeUrl = response.data.pagamento.url;
-    product = { ...product, stripeUrl };
-  }
-
-  let qrCode;
-  if (response.data.qrcode.alt) {
-    qrCode = {
-      imageUrl: response.data.qrcode.url,
-      code: response.data.qrcode.alt,
+    let product: Product = {
+      slug,
+      title: response.data.titulo[0].text,
+      description: RichText.asHtml(response.data.descricao),
+      price: response.data.preco,
+      updatedAt: new Date(
+        response.last_publication_date as string
+      ).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
+      images: filteredImages,
+      pixDiscount: response.data.porcentagem_desconto_pix,
     };
-    product = { ...product, qrCode };
-  }
 
-  let productLink;
-  if (response.data.cortesia.url) {
-    productLink = response.data.cortesia.url;
-    product = { ...product, productLink };
-  }
+    let stripeUrl;
+    if (response.data.pagamento?.url) {
+      stripeUrl = response.data.pagamento.url;
+      product = { ...product, stripeUrl };
+    }
 
-  return {
-    props: {
-      product,
-    },
-  };
+    let qrCode;
+    if (response.data.qrcode?.alt) {
+      qrCode = {
+        imageUrl: response.data.qrcode.url,
+        code: response.data.qrcode.alt,
+      };
+      product = { ...product, qrCode };
+    }
+
+    let productLink;
+    if (response.data.cortesia?.url) {
+      productLink = response.data.cortesia.url;
+      product = { ...product, productLink };
+    }
+
+    return {
+      props: {
+        product,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };

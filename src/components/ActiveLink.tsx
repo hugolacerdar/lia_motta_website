@@ -31,7 +31,7 @@ export function ActiveLink({
   }
 
   return (
-    <Link {...rest}>
+    <Link {...rest} legacyBehavior>
       {cloneElement(children, {
         borderBottom: isActive ? `1px solid ${borderColor}` : "none",
       })}

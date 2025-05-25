@@ -1,10 +1,18 @@
-import Prismic from "@prismicio/client";
+import * as prismic from '@prismicio/client';
+
+const repositoryName = process.env.PRISMIC_ENDPOINT?.split('https://')[1]?.split('.')[0] || '';
 
 export function getPrismicClient(req?: unknown) {
-  const prismic = Prismic.client(process.env.PRISMIC_ENDPOINT as string, {
-    req,
+  const client = prismic.createClient(repositoryName, {
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+    fetch: req ? undefined : fetch,
+    routes: [
+      {
+        type: 'produto',
+        path: '/produtos/:uid',
+      },
+    ],
   });
 
-  return prismic;
+  return client;
 }
