@@ -1,5 +1,4 @@
 import { getPrismicClient } from "../../services/prismic";
-import Prismic from "@prismicio/client";
 import { GetStaticProps } from "next";
 import { RichText } from "prismic-dom";
 import { Grid, Flex, Icon } from "@chakra-ui/react";
@@ -43,15 +42,20 @@ export default function ProductsPage({ products }: ProductsPageProps) {
         marginBottom="30px"
         ml={["10px", "10px", "10px", "0"]}
       >
-        <Link href="/">Início</Link> <Icon as={RiArrowRightSLine} />{" "}
-        <Link href="/produtos">Produtos</Link>
+        <Link href="/" legacyBehavior>
+          <a>Início</a>
+        </Link>{" "}
+        <Icon as={RiArrowRightSLine} />{" "}
+        <Link href="/produtos" legacyBehavior>
+          <a>Produtos</a>
+        </Link>
       </Flex>
 
       <Grid
         templateColumns={["1fr", "1fr 1fr", "repeat(3, 1fr)"]}
         gap={["40px", "50px", "100px"]}
-        align="center"
-        justify="center"
+        alignItems="center"
+        justifyContent="center"
         px={["30px", "0"]}
         my="50px"
       >
@@ -71,17 +75,14 @@ export default function ProductsPage({ products }: ProductsPageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prismic = getPrismicClient();
+  const client = getPrismicClient();
 
-  const response = await prismic.query(
-    [Prismic.predicates.at("document.type", "produto")],
-    {
-      fetch: ["produto.titulo", "produto.imagens", "produto.preco"],
-      pageSize: 20,
-    }
-  );
+  const response = await client.getAllByType('produto', {
+    fetch: ['produto.titulo', 'produto.imagens', 'produto.preco'],
+    pageSize: 20,
+  });
 
-  const products = response.results.map((p) => {
+  const products = response.map((p) => {
     return {
       slug: p.uid,
       title: p.data.titulo[0].text,
@@ -102,5 +103,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       products,
     },
+    revalidate: 60 * 30, // 30 minutes
   };
 };

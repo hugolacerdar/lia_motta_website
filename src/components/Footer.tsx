@@ -1,13 +1,10 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, HStack, Center, Link as ChakraLink, Icon } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { HStack, Center, Link as ChakraLink, Icon } from "@chakra-ui/react";
 import { RiInstagramLine } from "react-icons/ri";
 import { IoLogoTiktok, IoLogoInstagram, IoLogoYoutube } from "react-icons/io5";
-import CreatedBy from "./CreatedBy";
 
 export default function Footer() {
   const { asPath } = useRouter();
-
   const isHome = asPath === "/";
 
   const socialLinks = [
@@ -29,8 +26,24 @@ export default function Footer() {
   ];
 
   return (
-    <>
-      <Box margin={isHome ? "90vh 0 0 0" : "100px 0 0 0"} py="50px">
+    <Box
+      position="relative"
+      _before={
+        isHome
+          ? {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "linear-gradient(to bottom, transparent, white)",
+              zIndex: -1,
+            }
+          : undefined
+      }
+    >
+      <Box py="50px">
         <Center>
           {socialLinks.map((sn) => (
             <ChakraLink
@@ -50,7 +63,6 @@ export default function Footer() {
           ))}
         </Center>
       </Box>
-      <CreatedBy />
-    </>
+    </Box>
   );
 }

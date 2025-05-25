@@ -1,6 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/button";
-import { Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Button, Image } from "@chakra-ui/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -68,8 +66,9 @@ export default function ProductCard({
             </Heading>
             <Text>{price}</Text>
           </Flex>
-          <Link href={`/produtos/${slug}`} passHref>
+          <Link href={`/produtos/${slug}`} legacyBehavior passHref>
             <Button
+              as="a"
               mt="10px"
               color="white"
               bgColor="gray.900"

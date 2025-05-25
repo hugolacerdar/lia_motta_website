@@ -1,31 +1,16 @@
-import Document, { Head, Html, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/react';
+import { theme } from '../styles/theme';
 
-export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang="pt">
-        <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Fraunces:ital@1&display=swap"
-            rel="stylesheet"
-          />
-
-          <link
-            rel="stylesheet"
-            media="screen"
-            href="https://fontlibrary.org//face/miedinger"
-            type="text/css"
-          />
-          {/* eslint-disable-next-line @next/next/no-css-tags */}
-          <link rel="stylesheet" href="scrollbar.css" />
-          <link rel="shortcut icon" href="/favicon/4.png" type="image/png" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }

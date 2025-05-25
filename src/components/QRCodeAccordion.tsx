@@ -109,7 +109,6 @@ export default function QRCodeAccordion({ product }: QRCodeAccordionProps) {
                 </FormLabel>
                 <Switch
                   id="mail-condition"
-                  colorMode="light"
                   onChange={(e) => setShowQRCode(e.target.checked)}
                 />
               </FormControl>

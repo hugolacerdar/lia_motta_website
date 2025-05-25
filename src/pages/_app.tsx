@@ -1,26 +1,38 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import SideDrawer from "../components/Drawer";
 import { DrawerProvider } from "../contexts/DrawerContext";
 import { theme } from "../styles/theme";
 import NProgress from "nprogress";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import "../components/nprogress.css";
-
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleStart = () => NProgress.start();
+    const handleComplete = () => NProgress.done();
+    const handleError = () => NProgress.done();
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleError);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+      router.events.off("routeChangeError", handleError);
+    };
+  }, [router]);
+
   return (
     <ChakraProvider theme={theme}>
       <DrawerProvider>
-        <Header />
-        <SideDrawer />
-        <Component {...pageProps} />
-        <Footer />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </DrawerProvider>
     </ChakraProvider>
   );

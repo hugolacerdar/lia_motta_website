@@ -21,6 +21,7 @@ export default function NavLink({
     <ActiveLink
       href={href}
       passHref
+      legacyBehavior
       shouldMatchExactHref={true}
       borderColor={borderColor}
     >

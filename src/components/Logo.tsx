@@ -1,4 +1,4 @@
-import { Heading, Text } from "@chakra-ui/layout";
+import { Heading, Text } from "@chakra-ui/react";
 
 interface LogoProps {
   color: string;
